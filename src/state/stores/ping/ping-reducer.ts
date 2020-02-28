@@ -1,12 +1,15 @@
-export const pingReducer = (state = { isPinging: false }, action) => {
-  switch (action.type) {
-    case 'PING':
-      return { isPinging: true };
+import { handleActions } from 'redux-actions';
 
-    case 'PONG':
-      return { isPinging: false };
-
-    default:
-      return state;
-  }
-};
+export const pingReducer = handleActions(
+  {
+    PING: state => ({
+      ...state,
+      isPinging: true,
+    }),
+    PONG: state => ({
+      ...state,
+      isPinging: false,
+    }),
+  },
+  { isPinging: false }
+);

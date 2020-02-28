@@ -1,18 +1,21 @@
-import * as React from 'react';
+import { ConnectedRouter } from 'connected-react-router';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import config from './config';
-import { App } from './containers/root';
-import { condfigureStore } from './state/configure-store';
+import { App } from './containers/app';
+import condfigureStore, { history } from './state/configure-store';
 
-const store = condfigureStore();
+const store = condfigureStore({ preloadedState: {} });
 console.log(config);
 
 const renderApp = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </Provider>,
     document.getElementById('app')
   );

@@ -21,6 +21,7 @@ module.exports = {
     'react/prop-types': 0,
   },
   globals: {
+    __reduxStore: true,
     document: true,
   },
 };

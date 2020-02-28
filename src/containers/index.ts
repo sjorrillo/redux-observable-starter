@@ -1,2 +1,2 @@
 export { Home } from './home/home';
-export { Tacos } from './tacos/tacos';
+export { Sandwiches, Tacos, Bus, Cart } from './tacos/tacos';

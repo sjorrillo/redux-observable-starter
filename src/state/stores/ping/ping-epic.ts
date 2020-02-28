@@ -1,8 +1,7 @@
-import { filter, mapTo, delay } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
+import { mapTo, delay } from 'rxjs/operators';
+
+import { types } from './ping-action';
 
 export const pingEpic = action$ =>
-  action$.pipe(
-    filter(action => action.type === 'PING'),
-    delay(1000),
-    mapTo({ type: 'PONG' })
-  );
+  action$.pipe(ofType(types.PING), delay(1000), mapTo({ type: types.PONG }));
