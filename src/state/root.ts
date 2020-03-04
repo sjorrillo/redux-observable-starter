@@ -2,7 +2,12 @@ import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 
-import { pingEpic, pingReducer } from './stores/ping';
+import { pingEpic, pingReducer, IPingState } from './stores/ping';
+
+export interface IApplicationStore {
+  ping: IPingState;
+  [reducer: string]: any;
+}
 
 export const rootEpic = combineEpics(pingEpic);
 

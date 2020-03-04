@@ -1,15 +1,22 @@
 import { handleActions } from 'redux-actions';
 
+import { types } from './ping-action';
+import { IPingState } from './ping-types';
+
+const initialState: IPingState = {
+  isPinging: false,
+};
+
 export const pingReducer = handleActions(
   {
-    PING: state => ({
+    [types.PING]: state => ({
       ...state,
       isPinging: true,
     }),
-    PONG: state => ({
+    [types.PONG]: state => ({
       ...state,
       isPinging: false,
     }),
   },
-  { isPinging: false }
+  initialState
 );

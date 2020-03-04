@@ -1,16 +1,37 @@
 import merge from 'lodash/merge';
 
-import envVal from './env-val';
+interface IBaseConfig {
+  env: string;
+  isDevelopment: boolean;
+  isIntegration: boolean;
+  isProduction: boolean;
+}
+
+interface IAppSettings {
+  name: string;
+}
+
+interface IEnvironmentConfig {
+  app: IAppSettings;
+  apiUrl: string;
+}
+
+type CreateConfigArgsType = (
+  setupConfig: IBaseConfig,
+  baseEnvironment: string
+) => { baseConfig: IEnvironmentConfig; envConfig: IEnvironmentConfig };
 
 const baseEnvironment = 'production'; // base config environment
 
 const getEnvironment = () => {
-  const nodeEnv = envVal('NODE_ENV', baseEnvironment);
+  const nodeEnv = process.env.NODE_ENV || baseEnvironment;
   if (!nodeEnv.match(/^development$|^integration$|^production$/i)) return baseEnvironment;
   return nodeEnv;
 };
 
-export const createConfig = (setupEnvFn = () => {}) => {
+export const createConfig = (
+  setupEnvFn: CreateConfigArgsType
+): IEnvironmentConfig & IBaseConfig => {
   const nodeEnv = getEnvironment();
   const setupConfig = {
     env: nodeEnv.toLowerCase(),
