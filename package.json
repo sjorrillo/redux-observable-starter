@@ -16,7 +16,8 @@
     "build:dev": {
       "command": "parcel src/index.html --out-dir build/debug",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "PORT": 3500
       }
     }
   },
