@@ -1,5 +1,8 @@
 module.exports = {
   extends: ['universe/node', 'universe/native'],
+  plugins: [
+    'react-hooks',
+  ],
   rules: {
     camelcase: [2, {
       allow: [] // add alowed variables
@@ -19,6 +22,8 @@ module.exports = {
     'react/jsx-closing-bracket-location': 0,
     'react/destructuring-assignment': 0,
     'react/prop-types': 0,
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': 'warn' // Checks effect dependencies
   },
   globals: {
     document: true,

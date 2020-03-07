@@ -5,7 +5,7 @@ import { combineEpics } from 'redux-observable';
 import { pingEpic, pingReducer, IPingState } from './stores/ping';
 
 export interface IApplicationStore {
-  ping: IPingState;
+  ping?: IPingState;
   [reducer: string]: any;
 }
 

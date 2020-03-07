@@ -7,8 +7,7 @@ import config from './config';
 import { App } from './containers/app';
 import condfigureStore, { history } from './state/configure-store';
 
-const store = condfigureStore({ preloadedState: {} });
-console.log(config);
+const store = condfigureStore({ preloadedState: {}, config });
 
 const renderApp = () => {
   ReactDOM.render(

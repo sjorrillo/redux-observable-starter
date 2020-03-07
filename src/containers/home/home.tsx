@@ -17,7 +17,7 @@ interface IOwnProps {
   isPinging: boolean;
 }
 
-export class Home extends React.Component<IOwnProps & IStateProps & IDispatchProps, any> {
+class Home extends React.Component<IOwnProps & IStateProps & IDispatchProps, any> {
   handleOnclick = () => {
     const { testAction } = this.props;
     testAction();

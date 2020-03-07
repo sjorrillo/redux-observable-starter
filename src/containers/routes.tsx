@@ -1,4 +1,4 @@
-import { Home, Sandwiches, Tacos, Bus, Cart } from './index';
+import { Home, Login, Sandwiches, Tacos, Bus, Cart } from './index';
 
 // Our route config is just an array of logical "routes"
 // with `path` and `component` props, ordered the same
@@ -8,6 +8,10 @@ export const routes = [
     path: '/',
     component: Home,
     exact: true,
+  },
+  {
+    path: '/login',
+    component: Login,
   },
   {
     path: '/sandwiches',

@@ -1,4 +1,4 @@
-import { createConfig } from './utilities/create-config';
+import { createConfig } from './common/utilities/create-config';
 
 export default createConfig((setupConfig, baseEnvironment) => {
   const { [baseEnvironment]: baseConfig, ...restSettings } = require('./environments/*.ts');

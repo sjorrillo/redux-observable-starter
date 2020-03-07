@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Link } from 'react-router-dom';
 
-import { RouteWithSubRoutes } from '../../utilities/router-utility';
+import { RouteWithSubRoutes } from '../../common/utilities/router-utility';
 
 function Sandwiches() {
   return <h2>Sandwiches</h2>;

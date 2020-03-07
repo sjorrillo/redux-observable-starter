@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 
-import { RouteWithSubRoutes } from '../utilities/router-utility';
+import { RouteWithSubRoutes } from '../common/utilities/router-utility';
 import { routes } from './routes';
 
 export class App extends React.Component<object, object> {
@@ -12,6 +12,9 @@ export class App extends React.Component<object, object> {
           <ul>
             <li>
               <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
             </li>
             <li>
               <Link to="/sandwiches">Sandwiches</Link>

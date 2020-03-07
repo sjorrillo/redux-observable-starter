@@ -1,6 +1,6 @@
 import merge from 'lodash/merge';
 
-interface IBaseConfig {
+export interface IBaseConfig {
   env: string;
   isDevelopment: boolean;
   isIntegration: boolean;
@@ -11,7 +11,7 @@ interface IAppSettings {
   name: string;
 }
 
-interface IEnvironmentConfig {
+export interface IEnvironmentConfig {
   app: IAppSettings;
   apiUrl: string;
 }
