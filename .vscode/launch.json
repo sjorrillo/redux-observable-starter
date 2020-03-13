@@ -12,7 +12,7 @@
       "webRoot": "${workspaceFolder}",
       "breakOnLoad": true,
       "sourceMapPathOverrides": {
-        "../*": "${webRoot}/*"
+        "../*": "${webRoot}/src/*"
       }
     }
   ]

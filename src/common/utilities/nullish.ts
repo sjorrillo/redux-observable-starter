@@ -1,1 +1,2 @@
-export const nullish = value => typeof value === 'undefined' || value === null;
+export const nullish = <TType>(value: TType | undefined | null): boolean =>
+  typeof value === 'undefined' || value === null;

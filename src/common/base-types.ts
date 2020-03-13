@@ -5,3 +5,5 @@ declare global {
     __reduxStore: any;
   }
 }
+
+export type ValueOf<T> = T[keyof T];
