@@ -38,6 +38,7 @@
     "eslint-config-universe": "^2.3.0",
     "eslint-formatter-friendly": "^7.0.0",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "jest": "^25.2.3",
     "parcel-bundler": "^1.12.4",
     "prettier": "1.19.1",
     "typescript": "^3.8.2"

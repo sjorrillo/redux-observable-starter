@@ -1,10 +1,10 @@
 import { stringifyUrl } from 'query-string';
-import { Observable, of } from 'rxjs';
-import { ajax, AjaxResponse } from 'rxjs/ajax';
-import { map, catchError } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
 import URL from 'url';
 
 import config from '../../config';
+import { isUrl } from '../regex';
+import { isObject } from '../utilities/type-of';
 
 interface IClientParms {
   data?: any;
@@ -12,13 +12,20 @@ interface IClientParms {
   headers?: object;
 }
 
-class ApiClient {
+export default class ApiClient {
   private headers?: object;
-  get: (url: string, { params, headers }: IClientParms) => Observable<AjaxResponse>;
-  post: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse>;
-  put: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse>;
-  patch: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse>;
-  delete: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse>;
+
+  get: (url: string, { params, headers }: IClientParms) => Promise<XMLHttpRequest | unknown>;
+  post: (url: string, { data, params, headers }: IClientParms) => Promise<XMLHttpRequest | unknown>;
+  put: (url: string, { data, params, headers }: IClientParms) => Promise<XMLHttpRequest | unknown>;
+  patch: (
+    url: string,
+    { data, params, headers }: IClientParms
+  ) => Promise<XMLHttpRequest | unknown>;
+  delete: (
+    url: string,
+    { data, params, headers }: IClientParms
+  ) => Promise<XMLHttpRequest | unknown>;
 
   constructor() {
     ['get', 'post', 'put', 'patch', 'del'].forEach(method => {
@@ -26,36 +33,36 @@ class ApiClient {
         return ajax({
           url: this.formatUrl(url, params),
           method: method.toLocaleUpperCase(),
-          ...(data ? { body: data } : {}),
+          body: data,
           headers: {
             ...(this.headers || {}),
             ...(headers || {}),
           },
-        }).pipe(
-          map(({ response }) => response),
-          catchError(_error => {
-            return of({
-              error: true,
-              payload: 'error message',
-            });
-          })
-        );
+        });
       };
     });
+
+    this.headers = {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    };
   }
 
-  private formatUrl = (path: string, params?: any) => {
-    const endpoint = path[0] === '/' ? path.substring(1) : path;
-    const url = URL.resolve(config.apiUrl, endpoint);
+  private formatUrl = (path: string, params: any) => {
+    let url = path;
+    if (!isUrl(path)) {
+      const endpoint = path[0] === '/' ? path.substring(1) : path;
+      url = URL.resolve(config.apiUrl, endpoint);
+    }
 
-    return params ? stringifyUrl({ url, query: params }) : url;
+    return params && isObject(params) ? stringifyUrl({ url, query: params }) : url;
   };
 
   clearHeaders = () => {
     this.headers = null;
   };
 
-  setExtraHeaders = headers => {
+  setHeaders = headers => {
     this.headers = {
       ...(this.headers || {}),
       ...headers,

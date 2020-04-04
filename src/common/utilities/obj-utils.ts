@@ -1,9 +1,11 @@
+import { isString } from './type-of';
+
 export const createObjectByPath = (
   obj: object,
   path: string | string[],
   value: any = null
 ): object => {
-  path = typeof path === 'string' ? path.split('.') : path;
+  path = isString(path) ? (path as string).split('.') : path;
   let current = obj;
   while (path.length > 1) {
     const [head, ...tail] = path as string[];

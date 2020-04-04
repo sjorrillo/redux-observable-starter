@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { IApplicationStore } from '../../state/root';
+import { IApplicationStore } from '../../state/root-store';
 import { testAction } from '../../state/stores/ping/ping-action';
 
 interface IStateProps {
@@ -10,7 +10,7 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
-  testAction: () => void;
+  testAction: (recordsPerPage: number) => void;
 }
 
 interface IOwnProps {
@@ -20,7 +20,7 @@ interface IOwnProps {
 class Home extends React.Component<IOwnProps & IStateProps & IDispatchProps, any> {
   handleOnclick = () => {
     const { testAction } = this.props;
-    testAction();
+    testAction(5);
   };
 
   render = (

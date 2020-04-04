@@ -3,11 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import { client } from './common/modules/api-client';
 import config from './config';
 import { App } from './containers/app';
-import condfigureStore, { history } from './state/configure-store';
+import setupRootStore, { history } from './state/root-store/setup-root-store';
 
-const store = condfigureStore({ preloadedState: {}, config });
+const store = setupRootStore({ client, config });
 
 const renderApp = () => {
   ReactDOM.render(

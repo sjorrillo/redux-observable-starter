@@ -5,4 +5,4 @@ export const types = {
   PONG: 'PONG',
 };
 
-export const testAction = createAction(types.PING);
+export const testAction = createAction<number>('PING');

@@ -1,7 +1,10 @@
 import { handleActions } from 'redux-actions';
 
 import { types } from './ping-action';
-import { IPingState } from './ping-types';
+
+export interface IPingState {
+  readonly isPinging: boolean;
+}
 
 const initialState: IPingState = {
   isPinging: false,
