@@ -10,7 +10,8 @@
     "lint:fix": "npm run lint -- --fix ",
     "lint-files": "eslint --cache --cache-location='.cache/' -f friendly",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "tsc --noEmit --watch"
+    "type-check:watch": "tsc --noEmit --watch",
+    "test": "FORCE_COLOR=true TZ=UTC node --max-old-space-size=4096 node_modules/.bin/jest --notify --logHeapUsage --detectOpenHandles --config jest.config.js"
   },
   "betterScripts": {
     "build:dev": {
