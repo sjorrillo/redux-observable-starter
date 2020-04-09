@@ -14,6 +14,21 @@
       "sourceMapPathOverrides": {
         "../*": "${webRoot}/src/*"
       }
-    }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest single run specific file",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      "args": [
+        "${fileBasename}",
+        "--verbose",
+        "--env=jsdom",
+        "-i",
+        "--no-cache"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
   ]
 }

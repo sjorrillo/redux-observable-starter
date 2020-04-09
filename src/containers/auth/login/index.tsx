@@ -8,12 +8,21 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import { LoginType } from '../../../common/schemas';
+import { IApplicationStore } from '../../../state/root-store';
+import { login } from '../../../state/stores/auth/auth-action';
 import { LoginForm } from './login-form';
 
-interface IOwnProps {
-  test: string;
+interface IStateProps {}
+
+interface IDispatchProps {
+  onLogin: (params: LoginType) => void;
 }
+
+interface IOwnProps {}
 
 const Copyright = () => {
   return (
@@ -47,7 +56,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default () => {
+const Login = ({ onLogin }) => {
   const classes = useStyles();
 
   return (
@@ -60,7 +69,7 @@ export default () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <LoginForm {...{ classes }} />
+        <LoginForm {...{ classes }} onSubmit={onLogin} />
         <Grid container>
           <Grid item xs>
             <Link href="#" variant="body2">
@@ -80,3 +89,16 @@ export default () => {
     </Container>
   );
 };
+
+export default connect<IStateProps, IDispatchProps, IOwnProps>(
+  (state: IApplicationStore): IStateProps => ({
+    isPinging: state.ping.isPinging,
+  }),
+  dispatch =>
+    bindActionCreators(
+      {
+        onLogin: login,
+      },
+      dispatch
+    )
+)(Login);

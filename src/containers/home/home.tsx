@@ -21,6 +21,13 @@ class Home extends React.Component<IOwnProps & IStateProps & IDispatchProps, any
   handleOnclick = () => {
     const { testAction } = this.props;
     testAction(5);
+    const a = {
+      x: 1,
+      c: {
+        b: 2,
+      },
+    };
+    console.log(a?.cd?.b);
   };
 
   render = (

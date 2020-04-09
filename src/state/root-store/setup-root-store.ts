@@ -6,6 +6,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import { IAction, Dependencies } from '../../common/base-types';
 import ApiClient from '../../common/modules/api-client';
 import { IBaseConfig } from '../../common/utilities/create-config';
+import { sessionMiddleware } from '../middlewares/session-middleware';
 import { createRootReducer, rootEpic, IApplicationStore } from './index';
 
 interface IConfigureStoreProps {
@@ -26,7 +27,8 @@ export const getStore = (client?: ApiClient): Store<IApplicationStore> => {
       client,
     },
   });
-  let storeCreator = compose(applyMiddleware(routerMiddleware(history), epicMiddleware));
+  const middlewares = [sessionMiddleware, routerMiddleware(history), epicMiddleware];
+  let storeCreator = compose(applyMiddleware(...middlewares));
 
   const basicStore = storeCreator(createStore);
   _store = basicStore(createRootReducer(history), preloadedState);
