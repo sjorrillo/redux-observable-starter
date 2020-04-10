@@ -1,4 +1,4 @@
-import { isString } from './type-of';
+import { isString, isFunction } from './type-of';
 
 export const createObjectByPath = (
   obj: object,
@@ -18,3 +18,13 @@ export const createObjectByPath = (
   current[path[0]] = value;
   return obj;
 };
+
+export const extractFunctionsFromNamespace = (...namespaces) =>
+  namespaces.reduce(
+    (acc, namespace) =>
+      Object.keys(namespace).reduce((acc, key) => {
+        const action = namespace[key];
+        return [...acc, ...(isFunction(action) ? [action] : [])];
+      }, acc),
+    []
+  );

@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -36,7 +36,7 @@ const Copyright = () => {
   );
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles<Theme>(theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -54,10 +54,13 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  red: {
+    color: (props: any) => props.color,
+  },
 }));
 
 const Login = ({ onLogin }) => {
-  const classes = useStyles();
+  const classes = useStyles({ color: 'green' });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -77,7 +80,7 @@ const Login = ({ onLogin }) => {
             </Link>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2">
+            <Link href="#" variant="body2" className={classes.red}>
               Don't have an account? Sign Up
             </Link>
           </Grid>

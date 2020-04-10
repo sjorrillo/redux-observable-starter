@@ -2,9 +2,9 @@ import { connectRouter, RouterState } from 'connected-react-router';
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 
-import { isFunction } from '../../common/utilities/type-of';
-import { IAuthState, authReducer, loginEpic } from '../stores/auth';
-import { IPingState, pingReducer, pingEpic } from '../stores/ping';
+import { extractFunctionsFromNamespace } from '../../common/utilities/obj-utils';
+import { IAuthState, authReducer, authEpics } from '../stores/auth';
+import { IPingState, pingReducer, pingEpics } from '../stores/ping';
 
 export interface IApplicationStore {
   auth?: IAuthState;
@@ -13,15 +13,9 @@ export interface IApplicationStore {
   [reducer: string]: any;
 }
 
-const createEpicArray = (...epicObject) =>
-  epicObject.reduce((acc, obj) => {
-    Object.keys(obj).reduce((acc, key) => {
-      const action = obj[key];
-      return !isFunction(action) ? acc : [...acc, action];
-    }, acc);
-  }, []);
+const epics = extractFunctionsFromNamespace(authEpics, pingEpics);
 
-export const rootEpic = combineEpics(...[loginEpic, pingEpic]);
+export const rootEpic = combineEpics(...epics);
 
 export const createRootReducer = history =>
   combineReducers({

@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "bnr build:dev",
-    "build": "parcel build src/index.html --out-dir build/release --public-url ./",
+    "start": "bnr build:dev",
+    "build": "bnr build:prod",
     "lint": "npm run lint-files -- src --ext .js,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix ",
     "lint-files": "eslint --cache --cache-location='.cache/' -f friendly",
@@ -15,10 +15,16 @@
   },
   "betterScripts": {
     "build:dev": {
-      "command": "parcel src/index.html --out-dir build/debug --open",
+      "command": "parcel resources/public/index.html --out-dir build/debug",
       "env": {
         "NODE_ENV": "development",
         "PORT": 3500
+      }
+    },
+    "build:prod": {
+      "command": "parcel build resources/public/index.html --experimental-scope-hoisting --detailed-report --out-dir build/release --public-url ./",
+      "env": {
+        "NODE_ENV": "production"
       }
     }
   },
@@ -42,12 +48,16 @@
     "eslint-plugin-react-hooks": "^2.5.0",
     "jest": "^25.2.3",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "parcel-plugin-clean-dist": "^0.0.6",
+    "parcel-plugin-static-files-copy": "^2.3.1",
     "prettier": "1.19.1",
     "typescript": "^3.8.2"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
+    "classnames": "^2.2.6",
     "connected-react-router": "^6.7.0",
     "lodash": "^4.17.15",
     "query-string": "^6.11.1",
@@ -61,5 +71,10 @@
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.4",
     "yup": "^0.28.3"
+  },
+  "staticFiles": {
+    "staticPath": [
+      "resources/public"
+    ]
   }
 }
