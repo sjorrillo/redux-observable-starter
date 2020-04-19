@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "clean": "npm cache clean --force && rimraf node_modules build",
+    "clean:dist": "rimraf build",
     "start": "bnr build:dev",
+    "prebuild": "rimraf .cache",
     "build": "bnr build:prod",
     "lint": "npm run lint-files -- src --ext .js,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix ",
@@ -15,14 +18,14 @@
   },
   "betterScripts": {
     "build:dev": {
-      "command": "parcel resources/public/index.html --out-dir build/debug",
+      "command": "parcel resources/public/index.html --out-dir build/dev",
       "env": {
         "NODE_ENV": "development",
         "PORT": 3500
       }
     },
     "build:prod": {
-      "command": "parcel build resources/public/index.html --experimental-scope-hoisting --detailed-report --out-dir build/release --public-url ./",
+      "command": "parcel build resources/public/index.html --no-source-maps --detailed-report --out-dir build/prod --public-url ./",
       "env": {
         "NODE_ENV": "production"
       }
@@ -52,6 +55,7 @@
     "parcel-plugin-clean-dist": "^0.0.6",
     "parcel-plugin-static-files-copy": "^2.3.1",
     "prettier": "1.19.1",
+    "rimraf": "^3.0.2",
     "typescript": "^3.8.2"
   },
   "dependencies": {
