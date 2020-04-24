@@ -79,6 +79,10 @@
   "staticFiles": {
     "staticPath": [
       "resources/public"
+    ],
+    "excludeGlob": [
+      "favicon.ico",
+      "index.html"
     ]
   }
 }

@@ -1,3 +1,4 @@
+import nullish from './nullish';
 import { isString, isFunction } from './type-of';
 
 export const createObjectByPath = (
@@ -28,3 +29,13 @@ export const extractFunctionsFromNamespace = (...namespaces) =>
       }, acc),
     []
   );
+
+export const removeNullishProps = (obj: any): any =>
+  Object.keys(obj || {}).reduce((acc: any, key: string) => {
+    if (nullish(obj[key])) return acc;
+
+    return {
+      ...(nullish(acc) ? {} : acc),
+      [key]: obj[key],
+    };
+  }, null);

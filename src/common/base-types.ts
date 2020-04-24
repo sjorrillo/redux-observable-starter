@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 
-import ApiClient from './modules/api-client';
+import { ApiClient } from './modules/xhr';
 
 declare global {
   interface Window {
@@ -9,6 +9,8 @@ declare global {
 }
 
 export type ValueOf<T> = T[keyof T];
+
+export type KeyValuePair<T = string> = { [key: string]: T };
 
 export type Dependencies = {
   client: ApiClient;

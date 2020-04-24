@@ -14,6 +14,11 @@ interface IOwnProps {
 export const LoginForm = ({ classes, onSubmit }: IOwnProps) => {
   const { handleSubmit, errors, control } = useForm<LoginType>({
     validationSchema: LoginSchema,
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
   });
 
   const onSubmitHandler = React.useCallback(

@@ -3,12 +3,15 @@ import { createAction } from 'redux-actions';
 import { LoginType } from '../../../common/schemas';
 
 export const types = {
-  LOGIN: 'auth/LOGIN',
-  LOGOUT: 'auth/LOGOUT',
-  RESTORE_STATE: 'auth/RESTORE_STATE',
+  LOGIN: {
+    START: 'auth:LOGIN/START',
+    COMPLETED: 'auth:LOGIN/COMPLETED',
+  },
+  LOGOUT: 'auth:LOGOUT',
+  RESTORE_STATE: 'auth:RESTORE_STATE',
 };
 
-export const login: (payload: LoginType) => void = createAction(types.LOGIN);
+export const login: (payload: LoginType) => void = createAction(types.LOGIN.START);
 
 export const logout: () => void = createAction(types.LOGOUT);
 

@@ -11,3 +11,12 @@ export const logout = () => {
   // eslint-disable-next-line no-undef
   location.reload();
 };
+
+export const isTokenExpired = (tokenExpirationTime?: number) => {
+  if (!tokenExpirationTime || tokenExpirationTime <= 0) return;
+
+  const date = new Date();
+  const localTimeInSeconds = date.getTime() / 1000;
+
+  return localTimeInSeconds > tokenExpirationTime;
+};

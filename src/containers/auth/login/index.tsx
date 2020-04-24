@@ -11,12 +11,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { RequestStatus } from '../../../common/base-types';
+import { logout } from '../../../common/modules/auth';
 import { LoginType } from '../../../common/schemas';
 import { IApplicationStore } from '../../../state/root-store';
 import { login } from '../../../state/stores/auth/auth-action';
 import { LoginForm } from './login-form';
 
-interface IStateProps {}
+interface IStateProps {
+  isLoading?: boolean;
+  error?: string;
+  user?: any;
+  isAuthenticated?: boolean;
+}
 
 interface IDispatchProps {
   onLogin: (params: LoginType) => void;
@@ -24,7 +31,7 @@ interface IDispatchProps {
 
 interface IOwnProps {}
 
-const Copyright = () => {
+const Copyright = ({ isAuthenticated }) => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
@@ -32,6 +39,11 @@ const Copyright = () => {
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}.
+      {isAuthenticated && (
+        <Link color="inherit" onClick={() => logout()}>
+          Logout
+        </Link>
+      )}
     </Typography>
   );
 };
@@ -59,9 +71,9 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
 }));
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, isLoading, error, user, isAuthenticated }) => {
   const classes = useStyles({ color: 'green' });
-
+  const title = `Sign in - user: ${user?.email} - isLoading: ${isLoading} - error: ${error}`;
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -70,7 +82,7 @@ const Login = ({ onLogin }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {title}
         </Typography>
         <LoginForm {...{ classes }} onSubmit={onLogin} />
         <Grid container>
@@ -87,7 +99,7 @@ const Login = ({ onLogin }) => {
         </Grid>
       </div>
       <Box mt={8}>
-        <Copyright />
+        <Copyright {...{ isAuthenticated }} />
       </Box>
     </Container>
   );
@@ -95,7 +107,10 @@ const Login = ({ onLogin }) => {
 
 export default connect<IStateProps, IDispatchProps, IOwnProps>(
   (state: IApplicationStore): IStateProps => ({
-    isPinging: state.ping.isPinging,
+    isLoading: state.auth.requestStatus === RequestStatus.Loading,
+    error: state.auth.requestStatus === RequestStatus.Error ? state.auth.error : null,
+    user: state.auth.user,
+    isAuthenticated: !!state.auth.user,
   }),
   dispatch =>
     bindActionCreators(
