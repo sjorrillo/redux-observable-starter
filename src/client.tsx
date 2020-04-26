@@ -1,6 +1,7 @@
 import { CssBaseline } from '@material-ui/core';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { ConnectedRouter } from 'connected-react-router';
+import { create } from 'jss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,6 +14,11 @@ import setupRootStore, { history } from './state/root-store/setup-root-store';
 import { GlobalStyles, theme } from './theme';
 
 const store = setupRootStore({ client, config });
+const jss = create({
+  ...jssPreset(),
+  plugins: [...jssPreset().plugins],
+  insertionPoint: 'jss-insertion-point',
+});
 
 initServiceError(store);
 initApiClient(store);
@@ -22,9 +28,11 @@ const renderApp = () => {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <GlobalStyles />
-          <App />
+          <StylesProvider jss={jss}>
+            <CssBaseline />
+            <GlobalStyles />
+            <App />
+          </StylesProvider>
         </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>,

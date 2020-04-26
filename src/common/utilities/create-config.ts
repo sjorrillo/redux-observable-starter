@@ -41,5 +41,5 @@ export const createConfig = (
   };
 
   const { baseConfig = {}, envConfig = {} } = setupEnvFn(setupConfig, baseEnvironment);
-  return merge(baseConfig, envConfig, setupConfig);
+  return merge(baseConfig, envConfig as any, setupConfig as any);
 };
