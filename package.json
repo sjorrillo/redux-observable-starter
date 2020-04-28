@@ -18,14 +18,14 @@
   },
   "betterScripts": {
     "build:dev": {
-      "command": "parcel resources/public/index.html --out-dir build/dev",
+      "command": "parcel src/resources/public/index.html --out-dir build/dev",
       "env": {
         "NODE_ENV": "development",
         "PORT": 3500
       }
     },
     "build:prod": {
-      "command": "parcel build resources/public/index.html --no-source-maps --detailed-report --out-dir build/prod --public-url ./",
+      "command": "parcel build src/resources/public/index.html --no-source-maps --detailed-report --out-dir build/prod --public-url ./",
       "env": {
         "NODE_ENV": "production"
       }
