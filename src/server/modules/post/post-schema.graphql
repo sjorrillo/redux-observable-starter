@@ -1,0 +1,25 @@
+type Query {
+  ping: String!
+  posts: [Post!]!
+}
+
+type Mutation {
+  createDraft(title: String!, content: String!): Post
+  addComment(postId: ID!, content: String!): ID
+}
+
+"Description for the type"
+type Post {
+  """
+    ## Description for field. support markdown
+  """
+  id: ID!
+  title: String!
+  content: String!
+  comments: [Comment]
+}
+
+type Comment {
+  id: ID!
+  content: String!
+}

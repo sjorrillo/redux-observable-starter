@@ -6,9 +6,11 @@
   "scripts": {
     "clean": "npm cache clean --force && rimraf node_modules build",
     "clean:dist": "rimraf build",
-    "start": "bnr build:dev",
-    "prebuild": "rimraf build .cache",
-    "build": "bnr build:prod",
+    "start": "bnr build:client:dev",
+    "start:server": "bnr build:server:dev",
+    "prebuild:client": "rimraf build .cache",
+    "build:client": "bnr build:client:prod",
+    "build:server": "bnr build:server:prod",
     "lint": "npm run lint-files -- src --ext .js,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix ",
     "lint-files": "eslint --cache --cache-location='.cache/' -f friendly",
@@ -17,26 +19,49 @@
     "test": "FORCE_COLOR=true TZ=UTC node --max-old-space-size=4096 node_modules/.bin/jest --notify --logHeapUsage --detectOpenHandles --config jest.config.js"
   },
   "betterScripts": {
-    "build:dev": {
-      "command": "parcel src/resources/public/index.html --out-dir build/dev",
+    "build:client:dev": {
+      "command": "parcel src/resources/public/index.html --out-dir build/client/dev",
       "env": {
         "NODE_ENV": "development",
         "PORT": 3500
       }
     },
-    "build:prod": {
-      "command": "parcel build src/resources/public/index.html --no-source-maps --detailed-report --out-dir build/prod --public-url ./",
+    "build:client:prod": {
+      "command": "parcel build src/resources/public/index.html --no-source-maps --detailed-report --out-dir build/client/prod --public-url ./",
       "env": {
         "NODE_ENV": "production"
+      }
+    },
+    "build:server:dev": {
+      "command": "nodemon --exec babel-node --extensions '.ts,.js,.json' src/server/bin/www.ts",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 4000
+      }
+    },
+    "build:server:prod": {
+      "command": "babel --extensions '.ts,.js,.json' --out-dir build/server/prod src/server",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 4000
       }
     }
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.6",
+    "@babel/node": "^7.8.7",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
     "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/plugin-transform-typescript": "^7.9.4",
     "@babel/preset-env": "^7.8.6",
     "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/express": "^4.17.6",
+    "@types/graphql": "^14.5.0",
     "@types/jest": "^25.1.3",
     "@types/lodash": "^4.14.149",
     "@types/node": "^13.7.6",
@@ -51,6 +76,7 @@
     "eslint-plugin-react-hooks": "^2.5.0",
     "jest": "^25.2.3",
     "nock": "^12.0.3",
+    "nodemon": "^2.0.3",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-bundle-visualiser": "^1.2.0",
     "parcel-plugin-custom-dist-structure": "^1.1.9",
@@ -58,14 +84,19 @@
     "prettier": "1.19.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.1",
     "typescript": "^3.8.2"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
+    "apollo-server-express": "^2.12.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.7.0",
+    "glob": "^7.1.6",
+    "graphql-tools": "^5.0.0",
     "lodash": "^4.17.15",
+    "merge-graphql-schemas": "^1.7.8",
     "query-string": "^6.11.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
