@@ -1,4 +1,4 @@
-import { ValidateOptions, ObjectSchema } from 'yup';
+import { ObjectSchema, ValidateOptions } from 'yup';
 
 import { createObjectByPath } from './obj-utils';
 

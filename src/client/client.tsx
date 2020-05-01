@@ -1,5 +1,5 @@
 import { CssBaseline } from '@material-ui/core';
-import { MuiThemeProvider, StylesProvider, jssPreset } from '@material-ui/core/styles';
+import { jssPreset, MuiThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { ConnectedRouter } from 'connected-react-router';
 import { create } from 'jss';
 import React from 'react';

@@ -1,4 +1,4 @@
-import { Home, Login, Sandwiches, Tacos, Bus, Cart } from './index';
+import { Bus, Cart, Home, Login, Sandwiches, Tacos } from './index';
 
 // Our route config is just an array of logical "routes"
 // with `path` and `component` props, ordered the same

@@ -33,7 +33,7 @@ interface IOwnProps {}
 
 const Copyright = ({ isAuthenticated }) => {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography align="center" color="textSecondary" variant="body2">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
@@ -92,8 +92,8 @@ const Login = ({ onLogin, isLoading, error, user, isAuthenticated }) => {
             </Link>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2" className={classes.red}>
-              Don't have an account? Sign Up
+            <Link className={classes.red} href="#" variant="body2">
+              Dont have an account? Sign Up
             </Link>
           </Grid>
         </Grid>

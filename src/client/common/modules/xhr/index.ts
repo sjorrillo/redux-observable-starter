@@ -1,7 +1,7 @@
 import { Store } from 'redux';
 
 import { IApplicationStore } from '../../../state/root-store';
-import { mediator, EventType } from '../mediator';
+import { EventType, mediator } from '../mediator';
 import apiClient from './api-client';
 
 export type ApiClient = apiClient;

@@ -1,8 +1,8 @@
-import { ofType, Epic } from 'redux-observable';
+import { Epic, ofType } from 'redux-observable';
 import { of } from 'rxjs';
-import { switchMap, pluck, concatMap, catchError } from 'rxjs/operators';
+import { catchError, concatMap, pluck, switchMap } from 'rxjs/operators';
 
-import { IAction, Dependencies } from '../../../common/base-types';
+import { Dependencies, IAction } from '../../../common/base-types';
 import { LoginType } from '../../../common/schemas';
 import { IApplicationStore } from '../../root-store';
 import { types } from './auth-action';

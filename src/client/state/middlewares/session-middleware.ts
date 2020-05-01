@@ -2,7 +2,7 @@ import isEqual from 'lodash/isEqual';
 import pick from 'lodash/pick';
 
 import { isLoggingOut, SESSION_STORAGE } from '../../common/modules/auth';
-import { mediator, EventType } from '../../common/modules/mediator';
+import { EventType, mediator } from '../../common/modules/mediator';
 import { removeNullishProps } from '../../common/utilities/obj-utils';
 import { getFromStorage, setInStorage } from '../../common/utilities/storage';
 import { logout, restoreState } from '../stores/auth';

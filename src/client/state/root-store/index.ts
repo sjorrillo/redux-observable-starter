@@ -3,8 +3,8 @@ import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 
 import { extractFunctionsFromNamespace } from '../../common/utilities/obj-utils';
-import { IAuthState, authReducer, authEpics } from '../stores/auth';
-import { IPingState, pingReducer, pingEpics } from '../stores/ping';
+import { authEpics, authReducer, IAuthState } from '../stores/auth';
+import { IPingState, pingEpics, pingReducer } from '../stores/ping';
 
 export interface IApplicationStore {
   auth?: IAuthState;

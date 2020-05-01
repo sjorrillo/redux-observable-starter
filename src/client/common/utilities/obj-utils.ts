@@ -1,5 +1,5 @@
 import nullish from './nullish';
-import { isString, isFunction } from './type-of';
+import { isFunction, isString } from './type-of';
 
 export const createObjectByPath = (
   obj: object,

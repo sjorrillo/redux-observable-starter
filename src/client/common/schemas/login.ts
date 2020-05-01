@@ -1,4 +1,4 @@
-import { string, object, boolean, InferType } from 'yup';
+import { boolean, InferType, object, string } from 'yup';
 
 export const LoginSchema = object().shape({
   email: string()

@@ -106,4 +106,20 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-build
+# setup
+build/
+
+# IDEs
+.idea
+.vscode
+.vs
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db

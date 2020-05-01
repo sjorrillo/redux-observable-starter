@@ -20,7 +20,7 @@ export const CheckboxField = ({
     <>
       <FormControlLabel control={<Checkbox {...props} />} label={label} />
       {showHelperText && (
-        <FormHelperText id={`${props.id}-helper-text`} error={showError}>
+        <FormHelperText error={showError} id={`${props.id}-helper-text`}>
           {showError ? error : helperText}
         </FormHelperText>
       )}

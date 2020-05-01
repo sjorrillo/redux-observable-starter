@@ -1,7 +1,7 @@
-import { ofType, Epic } from 'redux-observable';
-import { mapTo, delay, switchMap, pluck } from 'rxjs/operators';
+import { Epic, ofType } from 'redux-observable';
+import { delay, mapTo, pluck, switchMap } from 'rxjs/operators';
 
-import { IAction, Dependencies } from '../../../common/base-types';
+import { Dependencies, IAction } from '../../../common/base-types';
 import { IApplicationStore } from '../../root-store/index';
 import { types } from './ping-action';
 

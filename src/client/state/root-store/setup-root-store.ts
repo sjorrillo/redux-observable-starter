@@ -1,13 +1,13 @@
 import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
-import { createStore, applyMiddleware, compose, Store } from 'redux';
+import { applyMiddleware, compose, createStore, Store } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 
-import { IAction, Dependencies } from '../../common/base-types';
+import { Dependencies, IAction } from '../../common/base-types';
 import { ApiClient } from '../../common/modules/xhr';
 import { IBaseConfig } from '../../common/utilities/create-config';
 import { sessionMiddleware } from '../middlewares/session-middleware';
-import { createRootReducer, rootEpic, IApplicationStore } from './index';
+import { createRootReducer, IApplicationStore, rootEpic } from './index';
 
 interface IConfigureStoreProps {
   client: ApiClient;

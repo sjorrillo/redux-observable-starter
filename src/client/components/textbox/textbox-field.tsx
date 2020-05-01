@@ -46,12 +46,12 @@ export const TextboxField = ({
       {...props}
       error={showError}
       helperText={showError ? error : props.helperText}
-      type={showPassword ? 'text' : props.type}
-      inputRef={textInput}
       InputProps={{
         ...(props.InputProps || {}),
         ...(isPasswordField ? { endAdornment: passwordVisibilityButton } : {}),
       }}
+      inputRef={textInput}
+      type={showPassword ? 'text' : props.type}
     />
   );
 };

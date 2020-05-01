@@ -1,7 +1,7 @@
 import { stringifyUrl } from 'query-string';
-import { of, throwError, Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { ajax, AjaxError, AjaxResponse } from 'rxjs/ajax';
-import { flatMap, catchError } from 'rxjs/operators';
+import { catchError, flatMap } from 'rxjs/operators';
 import URL from 'url';
 
 import config from '../../../config';
@@ -9,7 +9,7 @@ import { KeyValuePair } from '../../base-types';
 import { isUrl } from '../../regex';
 import { isObject } from '../../utilities/type-of';
 import { isTokenExpired } from '../auth';
-import { mediator, EventType } from '../mediator';
+import { EventType, mediator } from '../mediator';
 
 interface IClientParms {
   data?: any;

@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from 'apollo-server-express';
 import fs from 'fs';
 import glob from 'glob';
-import { mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
+import { mergeResolvers, mergeTypes } from 'merge-graphql-schemas';
 import path from 'path';
 
 export const buildSchema = () => {

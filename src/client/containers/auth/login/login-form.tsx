@@ -1,9 +1,9 @@
 import Button from '@material-ui/core/Button';
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
-import { LoginType, LoginSchema } from '../../../common/schemas/login';
-import { TextboxField, CheckboxField } from '../../../components';
+import { LoginSchema, LoginType } from '../../../common/schemas/login';
+import { CheckboxField, TextboxField } from '../../../components';
 
 interface IOwnProps {
   message?: string;
@@ -33,54 +33,54 @@ export const LoginForm = ({ classes, onSubmit }: IOwnProps) => {
       <Controller
         as={
           <TextboxField
-            variant="standard"
-            margin="normal"
-            fullWidth
-            label="Email Address"
             autoComplete="email"
-            autoFocus
             error={errors.email?.message as any}
+            label="Email Address"
+            margin="normal"
+            variant="standard"
+            autoFocus
+            fullWidth
           />
         }
+        control={control}
         id="email"
         name="email"
-        control={control}
       />
       <Controller
         as={
           <TextboxField
-            variant="standard"
-            margin="normal"
-            fullWidth
-            label="Password"
-            type="password"
             autoComplete="current-password"
             error={errors.password?.message as any}
+            label="Password"
+            margin="normal"
+            type="password"
+            variant="standard"
+            fullWidth
           />
         }
+        control={control}
         id="password"
         name="password"
-        control={control}
       />
       <Controller
         as={
           <CheckboxField
             color="primary"
-            label="Remember me"
             error={errors.rememberMe?.message as any}
+            label="Remember me"
           />
         }
+        control={control}
         id="rememberMe"
         name="rememberMe"
         onChange={([, value]) => value}
-        control={control}
       />
       <Button
-        type="submit"
-        fullWidth
-        variant="contained"
+        className={classes.submit}
         color="primary"
-        className={classes.submit}>
+        type="submit"
+        variant="contained"
+        fullWidth>
         Sign In
       </Button>
     </form>

@@ -1,19 +1,72 @@
 module.exports = {
-  extends: ['universe/node', 'universe/native'],
-  plugins: [
-    'react-hooks',
+  env: {
+    browser: true,
+    es6: true,
+    jest: true,
+    'jest/globals': true,
+  },
+  extends: [
+    'universe/node',
+    'universe/native',
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:jest/recommended',
+    'plugin:jest-dom/recommended',
+    'prettier',
+  ],
+  plugins: ['react-hooks', 'jest', 'jest-dom', 'prettier'],
+  overrides: [
+    {
+      files: ['*.spec.js'],
+      rules: {
+        'jest/expect-expect': 'off',
+      },
+    },
   ],
   rules: {
-    camelcase: [2, {
-      allow: [] // add alowed variables
-    }],
+    camelcase: [
+      2,
+      {
+        allow: [], // add alowed variables
+      },
+    ],
     'import/no-extraneous-dependencies': 0,
     'import/prefer-default-export': 0,
     'no-bitwise': 0,
-    'no-unused-vars': [2, { vars: 'all', args: 'after-used', varsIgnorePattern: '^_', argsIgnorePattern: '^_', ignoreRestSiblings: true }],
+    'no-unused-vars': [
+      2,
+      {
+        vars: 'all',
+        args: 'after-used',
+        varsIgnorePattern: '^_',
+        argsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
+    'no-else-return': ['error'],
+    'no-extend-native': ['error'],
+    'no-lonely-if': ['error'],
+    'no-multi-str': ['error'],
+    'no-nested-ternary': 0,
+    'no-param-reassign': 0,
+    'no-return-assign': ['error'],
+    'no-shadow': 0,
+    'no-useless-escape': 0,
     'prefer-template': 2,
     'prefer-rest-params': 2,
-    'quotes': [2, 'single', 'avoid-escape'],
+    'prefer-object-spread': ['error'],
+    'prefer-arrow-callback': ['error'],
+    quotes: [2, 'single', 'avoid-escape'],
+    'sort-imports': [
+      'warn',
+      {
+        ignoreCase: true,
+        ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['multiple', 'single', 'all', 'none'],
+      },
+    ],
+    'yield-star-spacing': ['error', 'after'],
     'react-native/no-inline-styles': 0,
     'react-native/no-color-literals': 0,
     'react/prefer-stateless-function': 0,
@@ -22,10 +75,34 @@ module.exports = {
     'react/jsx-closing-bracket-location': 0,
     'react/destructuring-assignment': 0,
     'react/prop-types': 0,
-    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    'react-hooks/exhaustive-deps': 'warn' // Checks effect dependencies
+    'react/boolean-prop-naming': ['error', { rule: '^(is|has|can)[A-Z]([A-Za-z0-9]?)+' }],
+    'react/display-name': 0,
+    'react/jsx-equals-spacing': ['error'],
+    'react/jsx-key': ['error'],
+    'react/jsx-fragments': ['error'],
+    'react/jsx-sort-props': [
+      'error',
+      {
+        reservedFirst: true,
+        shorthandLast: true,
+      },
+    ],
+    'react/jsx-wrap-multilines': ['warn'],
+    'react/sort-prop-types': ['error'],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
   globals: {
     document: true,
+    jest: true,
+    process: false,
+    Promise: true,
+    localStorage: true,
+  },
+  settings: {
+    react: {
+      pragma: 'React',
+      version: 'detect',
+    },
   },
 };

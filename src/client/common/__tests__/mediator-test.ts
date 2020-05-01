@@ -1,4 +1,4 @@
-import { mediator, EventType } from '../modules/mediator';
+import { EventType, mediator } from '../modules/mediator';
 
 describe('modules/mediator', () => {
   describe('when a we have a subscription to an event', () => {

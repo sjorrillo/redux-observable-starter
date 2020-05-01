@@ -1,7 +1,7 @@
-import { Subject, Subscription, PartialObserver } from 'rxjs';
+import { PartialObserver, Subject, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { IMediatorEvent, EventType } from './event-types';
+import { EventType, IMediatorEvent } from './event-types';
 
 export default class Mediator {
   private static instance;

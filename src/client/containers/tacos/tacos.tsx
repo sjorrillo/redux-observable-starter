@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 
 import { RouteWithSubRoutes } from '../../common/utilities/router-utility';
 

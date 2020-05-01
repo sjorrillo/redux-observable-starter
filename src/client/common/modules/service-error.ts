@@ -1,7 +1,7 @@
 import { Store } from 'redux';
 
 import { IApplicationStore } from '../../state/root-store';
-import { mediator, EventType } from './mediator';
+import { EventType, mediator } from './mediator';
 
 export const init = (_store: Store<IApplicationStore>) => {
   mediator.on(EventType.ServiceError, {
