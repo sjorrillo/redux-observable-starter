@@ -13,6 +13,10 @@ Run `yarn`. This will make sure that all of the dependencies are installed.
 
 In the project directory, you can run:
 
+#### `yarn upd`
+
+Update all packages to the latest versions and launches the development server. This command requires [npm-check-updates](https://www.npmjs.com/package/npm-check-updates).
+
 #### `yarn start`
 
 Runs the app in the development mode.

@@ -39,7 +39,7 @@ export default connect<IStateProps, IDispatchProps, IOwnProps>(
   (state: IApplicationStore): IStateProps => ({
     isPinging: state.ping.isPinging,
   }),
-  dispatch =>
+  (dispatch) =>
     bindActionCreators(
       {
         testAction,

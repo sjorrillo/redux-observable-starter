@@ -48,7 +48,7 @@ const Copyright = ({ isAuthenticated }) => {
   );
 };
 
-const useStyles = makeStyles<Theme>(theme => ({
+const useStyles = makeStyles<Theme>((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -112,7 +112,7 @@ export default connect<IStateProps, IDispatchProps, IOwnProps>(
     user: state.auth.user,
     isAuthenticated: !!state.auth.user,
   }),
-  dispatch =>
+  (dispatch) =>
     bindActionCreators(
       {
         onLogin: login,

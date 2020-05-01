@@ -14,7 +14,7 @@ export const pingEpic: Epic<IAction<number>, IAction<number>, IApplicationStore,
     ofType(types.PING),
     delay(1000),
     pluck('payload'),
-    switchMap(records => {
+    switchMap((records) => {
       return client.get('https://httpbin.org/delay/1', {
         params: {
           per_page: records, // eslint-disable-line camelcase

@@ -10,7 +10,7 @@ export const client = apiClient.create();
 
 export const init = (store: Store<IApplicationStore>) => {
   mediator.on(EventType.Login, {
-    next: payload => {
+    next: (payload) => {
       const { auth } = store.getState();
       console.log('Login:', { payload, auth });
       if (!auth.token) return;
@@ -21,7 +21,7 @@ export const init = (store: Store<IApplicationStore>) => {
     },
   });
   mediator.on(EventType.Logout, {
-    next: payload => {
+    next: (payload) => {
       console.log('Logout:', payload);
       client.removeHeader('Authorization');
     },

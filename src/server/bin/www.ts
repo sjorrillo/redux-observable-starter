@@ -3,7 +3,7 @@ import http from 'http';
 
 import app, { graphqlPath } from '../app';
 
-const normalizePort = value => {
+const normalizePort = (value) => {
   const port = parseInt(value, 10);
   if (isNaN(port)) return value; // named pipe
 
@@ -17,7 +17,7 @@ app.set('port', serverPort);
 
 var server = http.createServer(app);
 
-const onError = error => {
+const onError = (error) => {
   if (error.syscall !== 'listen') {
     throw error;
   }

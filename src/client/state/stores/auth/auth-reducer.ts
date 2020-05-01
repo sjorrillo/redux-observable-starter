@@ -20,7 +20,7 @@ const initialState: IAuthState = {
 
 export const authReducer = handleActions(
   {
-    [types.LOGIN.START]: state => ({
+    [types.LOGIN.START]: (state) => ({
       ...state,
       requestStatus: RequestStatus.Loading,
     }),
@@ -43,7 +43,7 @@ export const authReducer = handleActions(
         requestStatus: RequestStatus.Success,
       };
     },
-    [types.LOGOUT]: state => ({
+    [types.LOGOUT]: (state) => ({
       ...state,
       user: null,
       token: null,

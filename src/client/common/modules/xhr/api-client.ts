@@ -29,7 +29,7 @@ export default class ApiClient {
   delete: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse | any>;
 
   constructor() {
-    ['get', 'post', 'put', 'patch', 'del'].forEach(method => {
+    ['get', 'post', 'put', 'patch', 'del'].forEach((method) => {
       this[method] = (url: string, { data, params, headers, errorHandled }: IClientParms = {}) => {
         if (isTokenExpired(this.tokenExpirationTime)) {
           const error = new Error('Expired jwt token');

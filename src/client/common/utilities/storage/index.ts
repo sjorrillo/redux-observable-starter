@@ -2,9 +2,9 @@ import * as ls from './ls';
 
 let storagePrefix: string;
 
-const getCombinedKey = (key: string) => `${storagePrefix || 'ls'}_${key}`;
+export const getCombinedKey = (key: string) => `${storagePrefix || 'ls'}_${key}`;
 
-export const setStoragePrefix = prefix => (storagePrefix = prefix);
+export const setStoragePrefix = (prefix) => (storagePrefix = prefix);
 
 export const setInStorage = (key: string, value: any) => ls.save(getCombinedKey(key), value);
 

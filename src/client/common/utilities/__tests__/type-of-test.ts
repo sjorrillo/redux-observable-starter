@@ -5,7 +5,7 @@ describe('utilities/type-of', () => {
     boolean: [true, false],
     number: [1],
     string: ['some string'],
-    function: [Function.prototype, function() {}, () => {}],
+    function: [Function.prototype, function () {}, () => {}],
     array: [[]],
     date: [new Date()],
     regexp: [new RegExp('some')],
@@ -14,9 +14,9 @@ describe('utilities/type-of', () => {
     null: [null],
   };
 
-  Object.keys(types).forEach(type => {
+  Object.keys(types).forEach((type) => {
     describe(`when a ${type} is provided`, () => {
-      types[type].forEach(item => {
+      types[type].forEach((item) => {
         it(`should return "${type}"`, () => {
           expect(typeOf(item)).toBe(type);
         });

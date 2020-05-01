@@ -14,7 +14,7 @@ const shouldLogin = (currentSession, prevSession) => !prevSession && currentSess
 const shouldHydrateSession = (currentSession, sessionLoaded) =>
   !isEqual(currentSession, sessionLoaded) && sessionLoaded;
 
-const getSessionFromStore = getState =>
+const getSessionFromStore = (getState) =>
   removeNullishProps(pick(getState().auth, ['user', 'token', 'tokenExpirationTime']));
 
 let sessionHydrated = false;
@@ -50,7 +50,7 @@ const saveSession = (getState, prevSession) => {
   setInStorage(SESSION_STORAGE, currentSession);
 };
 
-export const sessionMiddleware = ({ dispatch, getState }) => next => action => {
+export const sessionMiddleware = ({ dispatch, getState }) => (next) => (action) => {
   if (!action) {
     return next();
   }

@@ -28,7 +28,7 @@ export const getStore = (client?: ApiClient): Store<IApplicationStore> => {
     },
   });
   const middlewares = [sessionMiddleware, routerMiddleware(history), epicMiddleware];
-  let storeCreator = compose(applyMiddleware(...middlewares));
+  const storeCreator = compose(applyMiddleware(...middlewares));
 
   const basicStore = storeCreator(createStore);
   _store = basicStore(createRootReducer(history), preloadedState);

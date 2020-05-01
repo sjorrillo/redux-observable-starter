@@ -18,7 +18,7 @@ export const resolvers = {
       return post;
     },
     addComment: (_parent, args) => {
-      const post = posts.find(it => it.id === args.postId);
+      const post = posts.find((it) => it.id === args.postId);
       const comment = {
         id: `comment_${new Date().getMilliseconds()}`,
         content: args.content,

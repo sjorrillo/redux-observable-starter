@@ -6,7 +6,7 @@ const types = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegE
 
 const toStr = Object.prototype.toString;
 
-types.forEach(name => {
+types.forEach((name) => {
   class2type[`[object ${name}]`] = name.toLowerCase();
 });
 
@@ -17,13 +17,13 @@ export default function typeOf(obj) {
   return obj === null ? String(obj) : class2type[toStr.call(obj)] || 'object';
 }
 
-export const isBoolean = arg => typeOf(arg) === 'boolean';
-export const isNumber = arg => typeOf(arg) === 'number';
-export const isString = arg => typeOf(arg) === 'string';
-export const isFunction = arg => typeOf(arg) === 'function';
-export const isArray = arg => typeOf(arg) === 'array';
-export const isDate = arg => typeOf(arg) === 'date';
-export const isRegExp = arg => typeOf(arg) === 'regexp';
-export const isObject = arg => typeOf(arg) === 'object';
+export const isBoolean = (arg) => typeOf(arg) === 'boolean';
+export const isNumber = (arg) => typeOf(arg) === 'number';
+export const isString = (arg) => typeOf(arg) === 'string';
+export const isFunction = (arg) => typeOf(arg) === 'function';
+export const isArray = (arg) => typeOf(arg) === 'array';
+export const isDate = (arg) => typeOf(arg) === 'date';
+export const isRegExp = (arg) => typeOf(arg) === 'regexp';
+export const isObject = (arg) => typeOf(arg) === 'object';
 
-export const isNum = arg => isNumber(arg) && !Number.isNaN(arg);
+export const isNum = (arg) => isNumber(arg) && !Number.isNaN(arg);

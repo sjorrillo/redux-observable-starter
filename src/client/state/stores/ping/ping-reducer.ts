@@ -12,11 +12,11 @@ const initialState: IPingState = {
 
 export const pingReducer = handleActions(
   {
-    [types.PING]: state => ({
+    [types.PING]: (state) => ({
       ...state,
       isPinging: true,
     }),
-    [types.PONG]: state => ({
+    [types.PONG]: (state) => ({
       ...state,
       isPinging: false,
     }),

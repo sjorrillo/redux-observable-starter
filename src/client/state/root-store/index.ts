@@ -17,7 +17,7 @@ const epics = extractFunctionsFromNamespace(authEpics, pingEpics);
 
 export const rootEpic = combineEpics(...epics);
 
-export const createRootReducer = history =>
+export const createRootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     auth: authReducer,

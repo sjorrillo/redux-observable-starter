@@ -11,5 +11,7 @@ export const validateSchema = async (
 
   return await schema
     .validate(values, options)
-    .catch(err => err.inner.reduce((acc, it) => createObjectByPath(acc, it.path, it.message), {}));
+    .catch((err) =>
+      err.inner.reduce((acc, it) => createObjectByPath(acc, it.path, it.message), {})
+    );
 };

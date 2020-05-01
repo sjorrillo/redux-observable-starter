@@ -21,8 +21,8 @@ export default class Mediator {
   on = <TPayload = any>(event: EventType, action: PartialObserver<TPayload>): Subscription => {
     return this.subject$
       .pipe(
-        filter(e => e.type === event),
-        map(e => e.payload)
+        filter((e) => e.type === event),
+        map((e) => e.payload)
       )
       .subscribe(action);
   };
