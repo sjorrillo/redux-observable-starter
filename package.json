@@ -6,11 +6,11 @@
   "scripts": {
     "clean": "npm cache clean --force && rimraf node_modules build",
     "clean:dist": "rimraf build",
-    "start": "bnr build:client:dev",
-    "start:server": "bnr build:server:dev",
+    "start": "bnr build-client:dev",
+    "start:server": "bnr build-server:dev",
     "prebuild:client": "rimraf build .cache",
-    "build:client": "bnr build:client:prod",
-    "build:server": "bnr build:server:prod",
+    "build:client": "bnr build-client:prod",
+    "build:server": "bnr build-server:prod",
     "lint": "npm run lint-files -- src --ext .js,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix ",
     "lint-files": "eslint --cache --cache-location='.cache/' -f friendly",
@@ -19,27 +19,27 @@
     "test": "FORCE_COLOR=true TZ=UTC node --max-old-space-size=4096 node_modules/.bin/jest --notify --logHeapUsage --detectOpenHandles --config jest.config.js"
   },
   "betterScripts": {
-    "build:client:dev": {
+    "build-client:dev": {
       "command": "parcel src/resources/public/index.html --out-dir build/client/dev",
       "env": {
         "NODE_ENV": "development",
         "PORT": 3500
       }
     },
-    "build:client:prod": {
+    "build-client:prod": {
       "command": "parcel build src/resources/public/index.html --no-source-maps --detailed-report --out-dir build/client/prod --public-url ./",
       "env": {
         "NODE_ENV": "production"
       }
     },
-    "build:server:dev": {
+    "build-server:dev": {
       "command": "nodemon --exec babel-node --extensions '.ts,.js,.json' src/server/bin/www.ts",
       "env": {
         "NODE_ENV": "development",
         "PORT": 4000
       }
     },
-    "build:server:prod": {
+    "build-server:prod": {
       "command": "babel --extensions '.ts,.js,.json' --out-dir build/server/prod src/server",
       "env": {
         "NODE_ENV": "production",
@@ -56,6 +56,10 @@
     "src/**/*.{json,js,ts,tsx}": [
       "eslint --fix --max-warnings=0 -f friendly",
       "prettier --write"
+    ],
+    "src/**/*.scss": [
+      "sass-lint-auto-fix",
+      "sass-lint -v"
     ]
   },
   "devDependencies": {
@@ -71,6 +75,10 @@
     "@babel/preset-env": "^7.8.6",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.9.0",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.4",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/user-event": "^10.1.0",
     "@types/express": "^4.17.6",
     "@types/graphql": "^14.5.0",
     "@types/jest": "^25.1.3",
@@ -100,6 +108,8 @@
     "parcel-plugin-static-files-copy": "^2.3.1",
     "prettier": "1.19.1",
     "rimraf": "^3.0.2",
+    "sass-lint": "^1.13.1",
+    "sass-lint-auto-fix": "^0.21.0",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.2"
