@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import { init as initServiceError } from './common/modules/service-error';
+import { init as initTranslations } from './common/modules/translations';
 import { client, init as initApiClient } from './common/modules/xhr';
 import config from './config';
 import { App } from './containers/app';
@@ -22,6 +23,7 @@ const jss = create({
 
 initServiceError(store);
 initApiClient(store);
+initTranslations();
 
 const renderApp = () => {
   ReactDOM.render(
