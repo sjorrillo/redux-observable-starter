@@ -1,9 +1,12 @@
-import { Bus, Cart, Home, Login, Sandwiches, Tacos } from './index';
+import { AppTypes } from '../common/constants/app-types';
+import { IRouteProps } from '../common/utilities/router-utility';
+import { Clients, Dashboard, Products, Quotes } from './admin';
+import { Home, Login } from './index';
 
 // Our route config is just an array of logical "routes"
 // with `path` and `component` props, ordered the same
 // way you'd do inside a `<Switch>`.
-export const routes = [
+export const routes: IRouteProps[] = [
   {
     path: '/',
     component: Home,
@@ -14,20 +17,23 @@ export const routes = [
     component: Login,
   },
   {
-    path: '/sandwiches',
-    component: Sandwiches,
-  },
-  {
-    path: '/tacos',
-    component: Tacos,
+    path: '/admin',
+    component: Dashboard,
+    requiresAuthentication: true,
+    mainRoles: [AppTypes.MainRoles.ADMIN, AppTypes.MainRoles.CLIENT],
     routes: [
       {
-        path: '/tacos/bus',
-        component: Bus,
+        path: '/admin/clients',
+        component: Clients,
       },
       {
-        path: '/tacos/cart',
-        component: Cart,
+        path: '/admin/products',
+        component: Products,
+      },
+      {
+        path: '/admin/quotes',
+        component: Quotes,
+        mainRoles: [AppTypes.MainRoles.ADMIN],
       },
     ],
   },

@@ -20,3 +20,9 @@ export const isTokenExpired = (tokenExpirationTime?: number) => {
 
   return localTimeInSeconds > tokenExpirationTime;
 };
+
+export const isUserInRole = (userRoles: string[], allowedRoles?: string[], isAuthenticated?: boolean) => {
+  if (!allowedRoles?.length || !isAuthenticated) return !!isAuthenticated;
+
+  return userRoles?.some((role) => allowedRoles.includes(role));
+};

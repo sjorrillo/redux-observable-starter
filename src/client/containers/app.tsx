@@ -16,10 +16,7 @@ export const App = (): JSX.Element => {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/sandwiches">Sandwiches</Link>
-          </li>
-          <li>
-            <Link to="/tacos">Tacos</Link>
+            <Link to="/admin">admin</Link>
           </li>
         </ul>
 
