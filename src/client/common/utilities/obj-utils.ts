@@ -1,7 +1,11 @@
 import nullish from './nullish';
 import { isFunction, isString } from './type-of';
 
-export const createObjectByPath = (obj: object, path: string | string[], value: any = null): object => {
+export const createObjectByPath = (
+  obj: object,
+  path: string | string[],
+  value: any = null
+): object => {
   path = isString(path) ? (path as string).split('.') : path;
   let current = obj;
   while (path.length > 1) {

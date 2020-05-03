@@ -4,7 +4,9 @@ import { Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { RouteWithSubRoutes } from '../common/utilities/router-utility';
 import { routes } from './routes';
 
-export const App = (): JSX.Element => {
+export const App: React.FC<any> = () => {
+  const wideAvailableElements = React.useMemo(() => <div id="wideElements" />, []);
+
   return (
     <Router>
       <div>
@@ -26,6 +28,7 @@ export const App = (): JSX.Element => {
           ))}
         </Switch>
       </div>
+      {wideAvailableElements}
     </Router>
   );
 };

@@ -19,12 +19,20 @@ const fakeUser = {
   roles: ['admin'],
 };
 
-export const RouteWithSubRoutes = ({ path, routes, component: Component, requiresAuthentication, mainRoles, ...rest }: IRouteProps) => (
+export const RouteWithSubRoutes = ({
+  path,
+  routes,
+  component: Component,
+  requiresAuthentication,
+  mainRoles,
+  ...rest
+}: IRouteProps) => (
   <Route
     {...rest}
     path={path}
     render={(props) =>
-      !requiresAuthentication || isUserInRole(fakeUser.roles, mainRoles, fakeUser.isAuthenticated) ? (
+      !requiresAuthentication ||
+      isUserInRole(fakeUser.roles, mainRoles, fakeUser.isAuthenticated) ? (
         <Component
           {...props}
           routes={routes?.map((route) => ({
