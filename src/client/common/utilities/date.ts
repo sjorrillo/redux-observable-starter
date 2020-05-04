@@ -8,7 +8,7 @@ import {
   parse,
 } from 'date-fns';
 import { convertToTimeZone } from 'date-fns-timezone';
-import { es } from 'date-fns/locale';
+import es from 'date-fns/locale/es';
 
 import { DateFormats } from '../constants/date-formats';
 

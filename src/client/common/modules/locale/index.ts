@@ -1,4 +1,4 @@
-import { es } from 'date-fns/locale';
+import es from 'date-fns/locale/es';
 import i18next from 'i18next';
 
 import { DateFormats } from '../../constants/date-formats';
