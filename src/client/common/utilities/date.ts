@@ -33,6 +33,8 @@ interface IFormatOptions {
 export let locale: Locale = es;
 export let timezone: string = DateFormats.LIMA_TIMEZONE;
 
+export const now = (tz?: string) => convertToTimeZone(new Date(), { timeZone: tz || timezone });
+
 export const setLocaleSettings = ({
   locale: _locale,
   timezone: tz,
@@ -42,7 +44,7 @@ export const setLocaleSettings = ({
 };
 
 export const parseDate = (date: string, { format: _format, timezone: tz }: IFormatOptions) => {
-  const dateInput = parse(date, _format, new Date(), { locale });
+  const dateInput = parse(date, _format, now(tz), { locale });
   return convertToTimeZone(dateInput, { timeZone: tz || timezone });
 };
 

@@ -54,7 +54,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{json,js,ts,tsx}": [
+    "src/**/*.{js,ts,tsx}": [
       "eslint --fix --max-warnings=0 -f friendly",
       "prettier --write"
     ],
@@ -128,6 +128,7 @@
     "date-fns-timezone": "^0.1.4",
     "glob": "^7.1.6",
     "graphql-tools": "^5.0.0",
+    "i18next": "^19.4.4",
     "lodash": "^4.17.15",
     "merge-graphql-schemas": "^1.7.8",
     "query-string": "^6.12.1",

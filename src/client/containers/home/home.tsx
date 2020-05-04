@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import i18next from 'i18next';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -35,6 +36,8 @@ const Home: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       <Button color="primary" onClick={handleOnclick} variant="contained">
         Test
       </Button>
+      <br />
+      message from translations: {i18next.t('homeScreen.title', { nombre: 'javier' })}
     </div>
   );
 };

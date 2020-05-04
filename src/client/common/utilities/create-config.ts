@@ -14,6 +14,7 @@ interface IAppSettings {
 export interface IEnvironmentConfig {
   app: IAppSettings;
   apiUrl: string;
+  i18nDebug: boolean;
 }
 
 type CreateConfigArgsType = (

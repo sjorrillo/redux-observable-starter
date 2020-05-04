@@ -1,0 +1,14 @@
+{
+  "common": {
+    "ok": "Aceptar",
+    "cancel": "Cancelar",
+    "back": "Regresar",
+    "continue": "Continuar"
+  },
+  "errors": {
+    "invalidEmail": "Email invalido"
+  },
+  "homeScreen": {
+    "title": "Hola {{nombre}}"
+  }
+}

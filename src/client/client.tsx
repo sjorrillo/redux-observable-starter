@@ -6,9 +6,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import { init as initTranslations } from './common/modules/locale';
 import { init as initServiceError } from './common/modules/service-error';
 import { init as initEventListener } from './common/modules/socket';
-import { init as initTranslations } from './common/modules/translations';
 import { client, init as initApiClient } from './common/modules/xhr';
 import config from './config';
 import { App } from './containers/app';
@@ -25,7 +25,6 @@ const jss = create({
 initServiceError(store);
 initApiClient(store);
 initEventListener(store);
-initTranslations();
 
 const renderApp = () => {
   ReactDOM.render(
@@ -44,4 +43,4 @@ const renderApp = () => {
   );
 };
 
-renderApp();
+initTranslations(config, renderApp);
