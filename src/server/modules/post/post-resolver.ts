@@ -1,13 +1,18 @@
 const posts = [];
 let idCount = 0;
 
+// https://github.com/vnovick/graphql-fullstack-bootcamp/blob/master/Day3/graphql-yoga-example/src/schema.graphql
+// https://github.com/vnovick/graphql-fullstack-bootcamp/blob/master/Day3/graphql-yoga-example/src/index.js
+// https://typeorm.io/#/
+// https://typegraphql.com/
+
 export const resolvers = {
   Query: {
     ping: () => 'Hello from Graphql',
     posts: () => posts,
   },
   Mutation: {
-    createDraft: (_parent, args) => {
+    createDraft: (_parent, { object: args }) => {
       const post = {
         id: `post_${idCount++}`,
         title: args.title,

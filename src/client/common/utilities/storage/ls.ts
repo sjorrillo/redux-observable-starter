@@ -1,4 +1,4 @@
-import tryParse from '../try-parse';
+import tryParse from '../../../../common/utils/try-parse';
 
 const { localStorage } = window;
 

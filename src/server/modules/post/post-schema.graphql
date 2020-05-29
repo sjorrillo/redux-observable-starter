@@ -3,16 +3,19 @@ type Query {
   posts: [Post!]!
 }
 
+input Draft {
+  title: String!
+  content: String!
+}
+
 type Mutation {
-  createDraft(title: String!, content: String!): Post
+  createDraft(object: Draft): Post
   addComment(postId: ID!, content: String!): ID
 }
 
-# input Draft
-// https://github.com/vnovick/graphql-fullstack-bootcamp/blob/master/Day3/graphql-yoga-example/src/schema.graphql
-// https://github.com/vnovick/graphql-fullstack-bootcamp/blob/master/Day3/graphql-yoga-example/src/index.js
-// https://typeorm.io/#/
-// https://typegraphql.com/
+type Subscription {
+  posts: [Post!]!
+}
 
 "Description for the type"
 type Post {

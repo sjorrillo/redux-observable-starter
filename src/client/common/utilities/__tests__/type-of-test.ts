@@ -1,4 +1,4 @@
-import typeOf from '../type-of';
+import typeOf from '../../../../common/utils/type-of';
 
 describe('utilities/type-of', () => {
   const types = {

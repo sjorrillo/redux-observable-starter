@@ -19,6 +19,7 @@ export type Dependencies = {
 export interface IAction<TPayload = any, TMeta = any> extends Action<string> {
   payload?: TPayload;
   meta?: TMeta;
+  error?: boolean;
 }
 
 export enum RequestStatus {

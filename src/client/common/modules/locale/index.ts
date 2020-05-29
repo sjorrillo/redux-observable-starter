@@ -1,9 +1,9 @@
 import es from 'date-fns/locale/es';
 import i18next from 'i18next';
 
-import { DateFormats } from '../../constants/date-formats';
+import { DateFormats } from '../../../../common/constants/date-formats';
+import { setLocaleSettings } from '../../../../common/utils/date';
 import { IEnvironmentConfig } from '../../utilities/create-config';
-import { setLocaleSettings } from '../../utilities/date';
 
 export const init = (config: IEnvironmentConfig, onTransInitialized: () => void) => {
   setLocaleSettings({ locale: es, timezone: DateFormats.LIMA_TIMEZONE });

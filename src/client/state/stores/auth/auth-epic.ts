@@ -2,8 +2,8 @@ import { Epic, ofType } from 'redux-observable';
 import { of } from 'rxjs';
 import { catchError, concatMap, pluck, switchMap } from 'rxjs/operators';
 
+import { LoginType } from '../../../../common/schemas';
 import { Dependencies, IAction } from '../../../common/base-types';
-import { LoginType } from '../../../common/schemas';
 import { IApplicationStore } from '../../root-store';
 import { types } from './auth-action';
 
@@ -15,21 +15,51 @@ export const loginEpic: Epic<IAction<LoginType>, IAction, IApplicationStore, Dep
   action$.pipe(
     ofType(types.LOGIN.START),
     pluck('payload'),
-    switchMap((data) => {
-      const payload = data.rememberMe
-        ? { email: 'peter@klaven' } // error request
-        : { email: 'eve.holt@reqres.in', password: 'cityslicka' }; // successful request
-
+    switchMap(({ email, password }) => {
       return client
-        .post('https://reqres.in/api/login', {
-          data: payload,
+        .post('/auth/login', {
+          data: { email, password },
         })
         .pipe(
-          concatMap((response) => of({ user: { email: payload.email }, token: response.token }))
+          concatMap((response) =>
+            of({
+              user: response.user,
+              token: response.jwtToken,
+              tokenExpiry: response.jwtTokenExpiry,
+            })
+          )
         );
     }),
     concatMap((payload) => of({ type: types.LOGIN.COMPLETED, payload })),
     catchError((err) =>
       of({ type: types.LOGIN.COMPLETED, error: true, payload: err.response?.error || err.message })
+    )
+  );
+
+export const refreshTokenEpic: Epic<IAction, IAction, IApplicationStore, Dependencies> = (
+  action$,
+  _state,
+  { client }
+) =>
+  action$.pipe(
+    ofType(types.REFRESH_TOKEN.START),
+    switchMap(() => {
+      return client.post('/auth/refreshToken').pipe(
+        concatMap((response) =>
+          of({
+            user: response.user,
+            token: response.jwtToken,
+            tokenExpiry: response.jwtTokenExpiry,
+          })
+        )
+      );
+    }),
+    concatMap((payload) => of({ type: types.REFRESH_TOKEN.COMPLETED, payload })),
+    catchError((err) =>
+      of({
+        type: types.REFRESH_TOKEN.COMPLETED,
+        error: true,
+        payload: err.response?.error || err.message,
+      })
     )
   );

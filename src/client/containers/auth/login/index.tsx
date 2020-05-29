@@ -9,11 +9,12 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
+import { LoginType } from '../../../../common/schemas';
 import { RequestStatus } from '../../../common/base-types';
-import { logout } from '../../../common/modules/auth';
-import { LoginType } from '../../../common/schemas';
+import { logout } from '../../../common/modules/auth/utils';
 import { IApplicationStore } from '../../../state/root-store';
 import { login } from '../../../state/stores/auth/auth-action';
 import { LoginForm } from './login-form';
@@ -29,7 +30,7 @@ interface IDispatchProps {
   onLogin: (params: LoginType) => void;
 }
 
-interface IOwnProps {}
+interface IOwnProps extends RouteComponentProps<any> {}
 
 const Copyright = ({ isAuthenticated }) => {
   return (
@@ -71,9 +72,24 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
 }));
 
-const Login = ({ onLogin, isLoading, error, user, isAuthenticated }) => {
+const Login: React.FC<IStateProps & IDispatchProps & IOwnProps> = ({
+  onLogin,
+  isLoading,
+  error,
+  user,
+  isAuthenticated,
+  history,
+}) => {
   const classes = useStyles({ color: 'green' });
   const title = `Sign in - user: ${user?.email} - isLoading: ${isLoading} - error: ${error}`;
+
+  React.useEffect(() => {
+    // TODO: authenticated but missing rols
+    if (isAuthenticated) {
+      history.push('/admin');
+    }
+  }, [isAuthenticated, history]);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

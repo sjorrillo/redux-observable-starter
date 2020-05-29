@@ -6,7 +6,6 @@ import { createEpicMiddleware } from 'redux-observable';
 import { Dependencies, IAction } from '../../common/base-types';
 import { ApiClient } from '../../common/modules/xhr';
 import { IBaseConfig } from '../../common/utilities/create-config';
-import { sessionMiddleware } from '../middlewares/session-middleware';
 import { createRootReducer, IApplicationStore, rootEpic } from './index';
 
 interface IConfigureStoreProps {
@@ -27,7 +26,17 @@ export const getStore = (client?: ApiClient): Store<IApplicationStore> => {
       client,
     },
   });
-  const middlewares = [sessionMiddleware, routerMiddleware(history), epicMiddleware];
+  const middlewares = [routerMiddleware(history), epicMiddleware];
+  if (process.env.NODE_ENV === 'development') {
+    const createLogger = require('redux-logger').createLogger;
+    const logger = createLogger({
+      collapsed: true,
+      // Added diff and state transform to add more debug functionality and stop redux-logger from hanging
+      // diff: true, // show diff in console
+      // stateTransformer: (state) => state.mutate, // select slice of state object to speed up debug
+    });
+    middlewares.push(logger);
+  }
   const storeCreator = compose(applyMiddleware(...middlewares));
 
   const basicStore = storeCreator(createStore);

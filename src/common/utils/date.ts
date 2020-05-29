@@ -6,6 +6,7 @@ import {
   formatDistanceToNowStrict,
   Locale,
   parse,
+  parseISO,
 } from 'date-fns';
 import { convertToTimeZone } from 'date-fns-timezone';
 import es from 'date-fns/locale/es';
@@ -43,9 +44,15 @@ export const setLocaleSettings = ({
   locale = _locale || es;
 };
 
-export const parseDate = (date: string, { format: _format, timezone: tz }: IFormatOptions) => {
-  const dateInput = parse(date, _format, now(tz), { locale });
-  return convertToTimeZone(dateInput, { timeZone: tz || timezone });
+export const parseDate = (date: string, args?: IFormatOptions) => {
+  const format = args?.format || DateFormats.DATE_TIME_ISO;
+  if (format === DateFormats.DATE_TIME_ISO) {
+    return parseISO(date);
+  }
+
+  const _timezone = args?.timezone || timezone;
+  const dateInput = parse(date, format, now(_timezone), { locale });
+  return convertToTimeZone(dateInput, { timeZone: _timezone });
 };
 
 export const formatDate = (

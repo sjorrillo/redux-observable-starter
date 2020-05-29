@@ -1,4 +1,4 @@
-import { AppTypes } from '../common/constants/app-types';
+import { AppTypes } from '../../common/constants/app-types';
 import { IRouteProps } from '../common/utilities/router-utility';
 import { Clients, Dashboard, Products, Quotes } from './admin';
 import { Home, Login } from './index';

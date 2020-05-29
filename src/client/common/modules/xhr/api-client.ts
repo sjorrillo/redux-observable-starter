@@ -4,11 +4,11 @@ import { ajax, AjaxError, AjaxResponse } from 'rxjs/ajax';
 import { catchError, flatMap } from 'rxjs/operators';
 import URL from 'url';
 
+import { isObject } from '../../../../common/utils/type-of';
 import config from '../../../config';
 import { KeyValuePair } from '../../base-types';
 import { isUrl } from '../../regex';
-import { isObject } from '../../utilities/type-of';
-import { isTokenExpired } from '../auth';
+import { isTokenExpired } from '../auth/utils';
 import { EventType, mediator } from '../mediator';
 
 interface IClientParms {
@@ -22,11 +22,11 @@ export default class ApiClient {
   private headers?: KeyValuePair;
   public tokenExpirationTime?: number;
 
-  get: (url: string, { params, headers }: IClientParms) => Observable<AjaxResponse | any>;
-  post: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse | any>;
-  put: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse | any>;
-  patch: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse | any>;
-  delete: (url: string, { data, params, headers }: IClientParms) => Observable<AjaxResponse | any>;
+  get: (url: string, { params, headers }?: IClientParms) => Observable<AjaxResponse | any>;
+  post: (url: string, { data, params, headers }?: IClientParms) => Observable<AjaxResponse | any>;
+  put: (url: string, { data, params, headers }?: IClientParms) => Observable<AjaxResponse | any>;
+  patch: (url: string, { data, params, headers }?: IClientParms) => Observable<AjaxResponse | any>;
+  delete: (url: string, { data, params, headers }?: IClientParms) => Observable<AjaxResponse | any>;
 
   constructor() {
     ['get', 'post', 'put', 'patch', 'del'].forEach((method) => {
@@ -49,6 +49,7 @@ export default class ApiClient {
             ...(this.headers || {}),
             ...(headers || {}),
           },
+          withCredentials: true,
         }).pipe(
           flatMap((ajaxResponse: AjaxResponse) => {
             const { response, status } = ajaxResponse;

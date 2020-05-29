@@ -6,7 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 
-import { isString } from './type-of';
+import { isString } from '../../../common/utils/type-of';
 
 export interface ISnackbarArgs {
   message: string;

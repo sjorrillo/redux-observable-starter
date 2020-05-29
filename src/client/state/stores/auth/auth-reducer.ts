@@ -1,12 +1,12 @@
 import { handleActions } from 'redux-actions';
 
-import { RequestStatus } from '../../../common/base-types';
+import { IAction, RequestStatus } from '../../../common/base-types';
 import { types } from './auth-action';
 
 export interface IAuthState {
   readonly user?: any;
   readonly token?: string;
-  readonly tokenExpirationTime?;
+  readonly tokenExpiry?: string;
   readonly error?: string;
   readonly requestStatus?: RequestStatus;
 }
@@ -24,7 +24,7 @@ export const authReducer = handleActions(
       ...state,
       requestStatus: RequestStatus.Loading,
     }),
-    [types.LOGIN.COMPLETED]: (state, { payload, error }: any) => {
+    [types.LOGIN.COMPLETED]: (state, { payload, error }: IAction<any>) => {
       if (error) {
         return {
           ...state,
@@ -38,7 +38,7 @@ export const authReducer = handleActions(
         ...state,
         user: payload.user,
         token: payload.token,
-        tokenExpirationTime: 1000 * 60 * 5,
+        tokenExpiry: payload.tokenExpiry,
         error: null,
         requestStatus: RequestStatus.Success,
       };
@@ -47,9 +47,29 @@ export const authReducer = handleActions(
       ...state,
       user: null,
       token: null,
-      tokenExpirationTime: null,
+      tokenExpiry: null,
       requestStatus: RequestStatus.Initial,
     }),
+    [types.REFRESH_TOKEN.START]: (state) => ({
+      ...state,
+    }),
+    [types.REFRESH_TOKEN.COMPLETED]: (state, { payload, error }: IAction<any>) => {
+      console.log('types.REFRESH_TOKEN.COMPLETED', { payload, error });
+      if (error) {
+        return {
+          ...state,
+          token: null,
+          tokenExpiry: null,
+        };
+      }
+
+      return {
+        ...state,
+        token: payload.token,
+        tokenExpiry: payload.tokenExpiry,
+        user: payload.user,
+      };
+    },
     [types.RESTORE_STATE]: (state, { payload }) => ({
       ...state,
       ...payload,

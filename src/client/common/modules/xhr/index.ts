@@ -13,17 +13,17 @@ export const init = (store: Store<IApplicationStore>) => {
     next: (payload) => {
       const { auth } = store.getState();
       console.log('Login:', { payload, auth });
-      if (!auth.token) return;
+      // if (!auth.token) return;
 
-      client.setHeaders({
-        Authorization: `Bearer ${auth.token}`,
-      });
+      // client.setHeaders({
+      //   Authorization: `Bearer ${auth.token}`,
+      // });
     },
   });
   mediator.on(EventType.Logout, {
     next: (payload) => {
       console.log('Logout:', payload);
-      client.removeHeader('Authorization');
+      // client.removeHeader('Authorization');
     },
   });
 };

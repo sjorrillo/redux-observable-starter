@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-import { isUserInRole } from '../modules/auth';
+import { isUserInRole } from '../modules/auth/utils';
 
 export interface IRouteProps {
   component?: React.ComponentType<any>;
@@ -10,14 +10,10 @@ export interface IRouteProps {
   requiresAuthentication?: boolean;
   mainRoles?: string[];
 
+  layout?: React.ComponentType<any>;
   routes?: IRouteProps[];
+  user?: any;
 }
-
-// TODO: read from store
-const fakeUser = {
-  isAuthenticated: true,
-  roles: ['admin'],
-};
 
 export const RouteWithSubRoutes = ({
   path,
@@ -25,30 +21,41 @@ export const RouteWithSubRoutes = ({
   component: Component,
   requiresAuthentication,
   mainRoles,
+  layout,
+  user,
   ...rest
 }: IRouteProps) => (
   <Route
     {...rest}
     path={path}
-    render={(props) =>
-      !requiresAuthentication ||
-      isUserInRole(fakeUser.roles, mainRoles, fakeUser.isAuthenticated) ? (
-        <Component
-          {...props}
-          routes={routes?.map((route) => ({
-            ...route,
-            requiresAuthentication,
-            mainRoles: [].concat(route?.mainRoles?.length ? route.mainRoles : mainRoles || []),
-          }))}
-        /> // pass the sub-routes down to keep nesting
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: { from: props.location },
-          }}
-        />
-      )
-    }
+    render={(props) => {
+      const hasRights = !requiresAuthentication || isUserInRole(user, mainRoles);
+
+      if (!hasRights) {
+        return (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location },
+            }}
+          />
+        );
+      }
+
+      const Layout = layout || React.Fragment;
+      return (
+        <Layout>
+          <Component
+            {...props}
+            routes={routes?.map((route) => ({
+              ...route,
+              requiresAuthentication,
+              user,
+              mainRoles: [].concat(route?.mainRoles?.length ? route.mainRoles : mainRoles || []),
+            }))}
+          />
+        </Layout>
+      );
+    }}
   />
 );
